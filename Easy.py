@@ -55,6 +55,8 @@
 
 # CHECK WORKING 
 
+# You may use these variabels interchangebly as they are from leetcode itself 
+
 # nums = [2,7,11,15]
 # nums = [2,4,11,3]
 # nums=[3,3]
@@ -63,4 +65,7 @@
 
 # SS=Solution()
 # SS.twoSum(nums,target)
+
+
+
         
