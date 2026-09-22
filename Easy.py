@@ -90,33 +90,64 @@
 #         self.next = next
 
 # solution 
-class Solution(object):
-    def addTwoNumbers(self, l1, l2):
-        """
-        :type l1: Optional[ListNode]
-        :type l2: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
-        dummy=ListNode(0)
-        curr=dummy
-        carry=0
+# class Solution(object):
+#     def addTwoNumbers(self, l1, l2):
+#         """
+#         :type l1: Optional[ListNode]
+#         :type l2: Optional[ListNode]
+#         :rtype: Optional[ListNode]
+#         """
+#         dummy=ListNode(0)
+#         curr=dummy
+#         carry=0
     
 
-        while l1 or l2 or carry:
-            # extracting current values 
-            v1=l1.val if l1 else 0
-            v2=l2.val if l2 else 0
-            # now adding the values and calculating the carry value if it exist 
-            total=v1+v2+carry
-            carry=total//10
-            # make a new node 
-            curr.next=ListNode(total%10)
-            curr=curr.next
+#         while l1 or l2 or carry:
+#             # extracting current values 
+#             v1=l1.val if l1 else 0
+#             v2=l2.val if l2 else 0
+#             # now adding the values and calculating the carry value if it exist 
+#             total=v1+v2+carry
+#             carry=total//10
+#             # make a new node 
+#             curr.next=ListNode(total%10)
+#             curr=curr.next
 
-            if l1:
-                l1=l1.next
-            if l2:
-                l2=l2.next
+#             if l1:
+#                 l1=l1.next
+#             if l2:
+#                 l2=l2.next
             
-        return dummy.next
-        
+#         return dummy.next
+
+
+# LEETCODE PROBLEM 3. Longest Substring Without Repeating Characters
+
+# Given a string s, find the length of the longest substring without duplicate characters.
+
+ 
+
+# Example 1:
+
+# Input: s = "abcabcbb"
+# Output: 3
+# Explanation: The answer is "abc", with the length of 3. Note that "bca" and "cab" are also correct answers.
+
+# solution 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        char_set=set()
+        left=0
+        max_len=0
+        for right in range(len(s)):
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left+=1
+            char_set.add(s[right])
+            max_len=max(max_len,right-left+1)
+        return max_len
+            
