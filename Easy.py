@@ -284,6 +284,41 @@ S.longestPalindrome(s)
 
 
 
+# 6. Zigzag Conversion
 
+# The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+# P   A   H   N
+# A P L S I I G
+# Y   I   R
+# And then read line by line: "PAHNAPLSIIGYIR"
+
+# Write the code that will take a string and make this conversion given a number of rows:
+
+# string convert(string s, int numRows);
+
+
+
+
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows>=len(s) or numRows==1:
+            return s
+        rows=[""]*numRows
+        current_row=0
+        down=False
+   
+        for char in s:
+            rows[current_row]+=char
+            if current_row==0 or current_row==numRows-1:
+                down = not down
+            current_row+=1 if down else -1
+        return "".join(rows)
+            
+
+# TEST CHECK 
+
+S=Solution()
+S.convert("raffay",3)
 
 
