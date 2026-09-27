@@ -368,3 +368,59 @@ x=123213
 
 ss=Solution()
 ss.reverse(x)
+
+
+
+# [8. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
+
+# Implement the `myAtoi(string s)` function, which converts a string to a 32-bit signed integer.
+# The algorithm for `myAtoi(string s)` is as follows:
+
+# 1. Whitespace: Ignore any leading whitespace (`" "`).
+# 2. Signedness: Determine the sign by checking if the next character is `'-'` or `'+'`, assuming positivity if neither present.
+# 3. Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. If no digits were read, then the result is 0.
+# 4. Rounding: If the integer is out of the 32-bit signed integer range `[-231, 231 - 1]`, then round the integer to remain in the range. Specifically, integers less than `-231` should be rounded to `-231`, and integers greater than `231 - 1` should be rounded to `231 - 1`.
+
+# Return the integer as the final result.
+
+
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        int_min,int_max= -2**31,2**31-1
+        n=len(s)
+        i=0
+
+        while i<n and s[i]==" ":
+            i+=1
+
+        if i==n:
+            return 0
+
+        sign=1
+        if s[i]=="+" or s[i]=="-":
+            if s[i]=="-":
+              sign=-1
+            i+=1
+        
+        num=0
+        while i<n and s[i].isdigit():
+            digit=int(s[i])
+            num=num*10 + digit
+            i+=1
+
+            if sign*num>int_max:
+                return int_max
+            if sign*num<int_min:
+                
+               return int_min
+            
+        result=sign*num
+        if result<int_min:
+            return int_min
+        if result>int_max:
+            return int_max
+
+        return result
+               
+        
+
