@@ -421,6 +421,37 @@ class Solution:
             return int_max
 
         return result
+
+
                
         
 
+# 9. Palindrome Number
+
+# Given an integer x, return true if x is a palindrome, and false otherwise.
+
+ 
+
+# Example 1:
+
+# Input: x = 121
+# Output: true
+# Explanation: 121 reads as 121 from left to right and from right to left.
+
+
+class Solution:
+    def isPalindrome(self,x: int) -> bool:
+        flag=True
+        int=str(x)
+        b=len(int)
+        
+        for i in range(len(int)):
+            if int[i]!=int[b-1]:
+                flag=False
+                return flag
+            b-=1
+                
+        return flag
+
+ss=Solution()
+ss.isPalindrome(121)
