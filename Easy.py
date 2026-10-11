@@ -703,7 +703,7 @@ class Solution:
 # Explanation: There is no common prefix among the input strings.
  
 
- class Solution:
+class Solution:
     def longestCommonPrefix(self, strs: list[str]) -> str:
         if not strs:
             return ""
@@ -712,7 +712,7 @@ class Solution:
         for i in strs[1:]:
             while not i.startswith(prefix):
                 prefix=prefix[:-1]
-                if prefix="":
+                if prefix=="":
                     return ""
         
         return prefix
@@ -841,7 +841,7 @@ class Solution:
 # Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).
  
 
- class Solution:
+class Solution:
     def threeSumClosest(self, nums: list[int], target: int) -> int:
         # Step 1: Sort the array to enable two-pointer approach
         nums.sort()
@@ -925,4 +925,65 @@ class Solution:
         # We join each tuple back into a string: "".join(('a', 'd')) -> "ad"
         return ["".join(combination) for combination in itertools.product(*groups)]
 
+
+
+# 18. 4Sum
+
+# Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+
+# 0 <= a, b, c, d < n
+# a, b, c, and d are distinct.
+# nums[a] + nums[b] + nums[c] + nums[d] == target
+# You may return the answer in any order.
+
+ 
+
+# Example 1:
+
+# Input: nums = [1,0,-1,0,-2,2], target = 0
+# Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+# Example 2:
+
+# Input: nums = [2,2,2,2,2], target = 8
+# Output: [[2,2,2,2]]
+ 
+
+class Solution:
+    def fourSum(self, nums: list[int], target: int) -> list[list[int]]:
+        nums.sort()
+        n=len(nums)
+        outputlist=[]
+       
+        for j in range(n-3):
+            # Skip duplicates for j
+            if j > 0 and nums[j] == nums[j - 1]:
+                continue
+           
+            for i in range(j+1,n-2):
+                # Skip duplicates for i
+                if i > j + 1 and nums[i] == nums[i - 1]:
+                    continue
+                left=i+1
+                right=n-1
+                while left<right:
+                    total=nums[j]+nums[i]+nums[left]+nums[right]
+                    if total==target:
+                        outputlist.append([nums[j],nums[i],nums[left],nums[right]])
+                        left+=1
+                        right-=1
+                        while left<right and nums[left]==nums[left-1]:
+                            left+=1
+                        while left<right and nums[right]==nums[right-1]:
+                            right-=1
+                    elif total<target:
+                        left+=1
+                    else:
+                        right-=1
+        return outputlist
+                        
+            
+
         
+                
+            
+            
