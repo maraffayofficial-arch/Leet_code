@@ -947,43 +947,43 @@ class Solution:
 # Input: nums = [2,2,2,2,2], target = 8
 # Output: [[2,2,2,2]]
  
-
 class Solution:
     def fourSum(self, nums: list[int], target: int) -> list[list[int]]:
         nums.sort()
-        n=len(nums)
-        outputlist=[]
-       
-        for j in range(n-3):
+        n = len(nums)
+        outputlist = []
+
+        for j in range(n - 3):
             # Skip duplicates for j
             if j > 0 and nums[j] == nums[j - 1]:
                 continue
-           
-            for i in range(j+1,n-2):
-                # Skip duplicates for i
+            
+            for i in range(j + 1, n - 2):
+                # Skip duplicates for i (must be > j + 1)
                 if i > j + 1 and nums[i] == nums[i - 1]:
                     continue
-                left=i+1
-                right=n-1
-                while left<right:
-                    total=nums[j]+nums[i]+nums[left]+nums[right]
-                    if total==target:
-                        outputlist.append([nums[j],nums[i],nums[left],nums[right]])
-                        left+=1
-                        right-=1
-                        while left<right and nums[left]==nums[left-1]:
-                            left+=1
-                        while left<right and nums[right]==nums[right-1]:
-                            right-=1
-                    elif total<target:
-                        left+=1
-                    else:
-                        right-=1
-        return outputlist
-                        
-            
-
-        
                 
-            
-            
+                left = i + 1
+                right = n - 1
+                
+                while left < right:
+                    total = nums[j] + nums[i] + nums[left] + nums[right]
+                    
+                    if total == target:
+                        outputlist.append([nums[j], nums[i], nums[left], nums[right]])
+                        
+                        # Advance left and right past duplicates
+                        left += 1
+                        while left < right and nums[left] == nums[left - 1]:
+                            left += 1
+                            
+                        right -= 1
+                        while left < right and nums[right] == nums[right + 1]:
+                            right -= 1
+                            
+                    elif total < target:
+                        left += 1
+                    else:
+                        right -= 1
+                        
+        return outputlist
