@@ -1043,3 +1043,63 @@ class Solution:
 
     return dummy.next
  
+
+
+ # 20. Valid Parentheses
+
+# Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+# An input string is valid if:
+
+# Open brackets must be closed by the same type of brackets.
+# Open brackets must be closed in the correct order.
+# Every close bracket has a corresponding open bracket of the same type.
+ 
+
+# Example 1:
+
+# Input: s = "()"
+
+# Output: true
+
+# Example 2:
+
+# Input: s = "()[]{}"
+
+# Output: true
+
+# Example 3:
+
+# Input: s = "(]"
+
+# Output: false
+
+# Example 4:
+
+# Input: s = "([])"
+
+# Output: true
+
+
+class Solution:
+
+  def isValid(self, s: str) -> bool:
+    stack = []
+    # Map closing brackets to their corresponding opening brackets
+    bracket_map = {")": "(", "}": "{", "]": "["}
+
+    for char in s:
+      if char in bracket_map:
+        # It's a closing bracket
+        # Pop the top element from stack if it's not empty, else assign a dummy value '#'
+        top_element = stack.pop() if stack else "#"
+
+        # If the mapped opening bracket doesn't match the top element, it's invalid
+        if bracket_map[char] != top_element:
+          return False
+      else:
+        # It's an opening bracket, push it onto the stack
+        stack.append(char)
+
+    # If the stack is empty, all opening brackets were matched! Otherwise, it's invalid.
+    return not stack
