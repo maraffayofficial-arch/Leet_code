@@ -1141,4 +1141,28 @@ class Solution:
     return dummy.next
 
 
-    
+# Problem 22 
+
+
+class Solution:
+
+  def generateParenthesis(self, n: int) -> list[str]:
+    result = []
+
+    def backtrack(current_string, open_count, close_count):
+      # Base case: if the string length reaches 2 * n, we formed a valid combination
+      if len(current_string) == 2 * n:
+        result.append(current_string)
+        return
+
+      # Rule 1: We can add an opening bracket if we still have some left (< n)
+      if open_count < n:
+        backtrack(current_string + "(", open_count + 1, close_count)
+
+      # Rule 2: We can add a closing bracket if there are open brackets waiting to be closed
+      if close_count < open_count:
+        backtrack(current_string + ")", open_count, close_count + 1)
+
+    # Start the recursion with an empty string and zero counts
+    backtrack("", 0, 0)
+    return result
