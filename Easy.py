@@ -1166,3 +1166,55 @@ class Solution:
     # Start the recursion with an empty string and zero counts
     backtrack("", 0, 0)
     return result
+
+    ss=Solution()
+    # 23. Merge k Sorted Lists
+
+# You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+
+# Merge all the linked-lists into one sorted linked-list and return it.
+
+ 
+
+# Example 1:
+
+# Input: lists = [[1,4,5],[1,3,4],[2,6]]
+# Output: [1,1,2,3,4,4,5,6]
+# Explanation: The linked-lists are:
+# [
+#   1->4->5,
+#   1->3->4,
+#   2->6
+# ]
+# merging them into one sorted linked list:
+# 1->1->2->3->4->4->5->6
+
+
+import heapq
+
+
+class Solution:
+
+  def mergeKLists(self, lists: list[ListNode | None]) -> ListNode | None:
+    dummy = ListNode(0)
+    current = dummy
+    min_heap = []
+
+    # 1. Push the first node of each non-empty list into the heap
+    for i, l in enumerate(lists):
+      if l:
+        # We store (l.val, i, l) so Python can safely compare nodes by their value.
+        # 'i' acts as a tie-breaker if two nodes have the exact same value.
+        heapq.heappush(min_heap, (l.val, i, l))
+
+    # 2. Extract the smallest node, attach it, and push the next node from that list
+    while min_heap:
+      val, i, node = heapq.heappop(min_heap)
+      current.next = node
+      current = current.next
+
+      # If there is a next node in that same list, push it into the heap
+      if node.next:
+        heapq.heappush(min_heap, (node.next.val, i, node.next))
+
+    return dummy.next
